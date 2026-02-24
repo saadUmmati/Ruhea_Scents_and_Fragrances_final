@@ -29,6 +29,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Build with Next.js
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }} # Ye line add karein
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }} # Agar auth use ho rahi hai to ye bhi
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
