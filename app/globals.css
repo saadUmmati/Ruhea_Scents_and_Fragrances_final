@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-urdu: var(--font-noto-urdu), sans-serif;
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Custom Colors */
+  --color-gold: var(--gold);
+  --color-rose-gold: var(--rose-gold);
+  --color-sage: var(--sage);
+  --color-terracotta: var(--terracotta);
+  --color-navy: var(--navy);
+  --color-cream: var(--cream);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Apothecary87 Inspired Light Theme */
+  --background: 60 10% 96%;
+  /* #f5f5f0 Cream */
+  --foreground: 231 38% 16%;
+  /* #1a1f3a Rich Navy (Text) */
+
+  --card: 0 0% 100%;
+  --card-foreground: 231 38% 16%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 231 38% 16%;
+
+  --primary: 231 38% 16%;
+  /* Rich Navy */
+  --primary-foreground: 46 65% 52%;
+  /* Gold Text on Navy */
+
+  --secondary: 93 14% 55%;
+  /* Sage Green */
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 60 5% 90%;
+  --muted-foreground: 231 20% 40%;
+
+  --accent: 46 65% 52%;
+  /* Gold */
+  --accent-foreground: 231 38% 16%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 231 20% 85%;
+  --input: 231 20% 85%;
+  --ring: 231 38% 16%;
+
+  /* Custom Variables */
+  --gold: 46 65% 52%;
+  --rose-gold: 356 48% 81%;
+  --sage: 93 14% 55%;
+  --terracotta: 8 49% 57%;
+  --navy: 231 38% 16%;
+  --cream: 60 10% 96%;
+}
+
+.dark {
+  /* Dark Theme */
+  --background: 0 0% 4%;
+  /* #0a0a0a Deep Black */
+  --foreground: 60 10% 96%;
+  /* Cream Text */
+
+  --card: 0 0% 7%;
+  /* Slightly lighter black */
+  --card-foreground: 60 10% 96%;
+
+  --popover: 0 0% 7%;
+  --popover-foreground: 60 10% 96%;
+
+  --primary: 46 65% 52%;
+  /* Gold */
+  --primary-foreground: 231 38% 16%;
+  /* Navy Text on Gold */
+
+  --secondary: 231 38% 16%;
+  /* Navy */
+  --secondary-foreground: 60 10% 96%;
+
+  --muted: 0 0% 15%;
+  --muted-foreground: 60 5% 60%;
+
+  --accent: 231 38% 16%;
+  /* Navy */
+  --accent-foreground: 46 65% 52%;
+  /* Gold */
+
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 46 65% 52%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"],
+  label {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1280px;
+  }
+}
