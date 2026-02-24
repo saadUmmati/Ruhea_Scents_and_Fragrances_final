@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUHÉA | Scents & Fragrances</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --gold: #c9a961;
+            --gold-hover: #d4b76d;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --border-gray: #e5e5e5;
+            --text-gray: #666666;
+            --discount-red: #dc3545;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--secondary-black);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-gray);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--primary-black);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--secondary-black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--secondary-black);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-icon:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--discount-red);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-btn, .signup-btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        .login-btn {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .signup-btn {
+            background: transparent;
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+        }
+
+        .signup-btn:hover {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* HERO CAROUSEL */
+        .hero-carousel {
+            position: relative;
+            height: 85vh;
+            overflow: hidden;
+            background: var(--primary-black);
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .carousel-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .carousel-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .carousel-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: white;
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 55px;
+            height: 55px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev { left: 3rem; }
+        .carousel-arrow.next { right: 3rem; }
+
+        /* SECTION CONTAINER */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--primary-black);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .view-all {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .view-all:hover {
+            gap: 1rem;
+        }
+
+        /* CATEGORY GRID */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .category-card:hover img {
+            transform: scale(1.15);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .category-card:hover .category-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .category-name {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* PRODUCT SCROLL */
+        .product-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 1.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .product-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .product-scroll::-webkit-scrollbar-track {
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .product-scroll::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .product-card {
+            flex: 0 0 300px;
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--gold);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            background: var(--light-gray);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--discount-red);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+        }
+
+        .product-timer {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .quick-view {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--primary-black);
+            padding: 0.8rem 2rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .product-card:hover .quick-view {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-brand {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--primary-black);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            letter-spacing: 2px;
+        }
+
+        .review-count {
+            color: var(--text-gray);
+        }
+
+        .product-price-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-black);
+        }
+
+        .product-original-price {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            text-decoration: line-through;
+        }
+
+        .view-product-btn {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-black);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        .view-product-btn:hover {
+            background: var(--gold);
+        }
+
+        /* BEST SELLERS GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* COLLECTION CARDS */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .collection-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .collection-content {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            color: white;
+        }
+
+        .collection-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .collection-content p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* QUIZ SECTION */
+        .quiz-section {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            margin: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .quiz-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .quiz-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quiz-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quiz-btn {
+            padding: 1.2rem 3.5rem;
+            background: white;
+            color: var(--gold);
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* BRAND STORY */
+        .brand-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .brand-story img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .brand-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--primary-black);
+            letter-spacing: 1px;
+        }
+
+        .brand-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more-link:hover {
+            gap: 1.3rem;
+        }
+
+        /* INSTAGRAM */
+        .instagram-section {
+            background: var(--light-gray);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 3rem auto 2rem;
+        }
+
+        .instagram-item {
+            height: 280px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .instagram-item::after {
+            content: '📷';
+            position: absolute;
+            inset: 0;
+            background: rgba(201, 169, 97, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .instagram-item:hover::after {
+            opacity: 1;
+        }
+
+        .instagram-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .instagram-item:hover img {
+            transform: scale(1.15);
+        }
+
+        .follow-btn {
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            background: var(--primary-black);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .follow-btn:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            max-width: 700px;
+            margin: 5rem auto;
+            padding: 3rem;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-black);
+        }
+
+        .newsletter-subtitle {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-gray);
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .subscribe-btn {
+            padding: 1rem 2.5rem;
+            background: var(--primary-black);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .subscribe-btn:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .newsletter-disclaimer {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary-black);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo-section img {
+            width: 150px;
+            margin-bottom: 1.5rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-description {
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .footer-contact {
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        .footer-contact a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: var(--gold);
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* CART SIDEBAR */
+        .cart-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            transition: right 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: var(--primary-black);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-gray);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .cart-item-image {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+
+        .cart-item-price {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border-gray);
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        .remove-item {
+            background: var(--discount-red);
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            transition: opacity 0.3s;
+        }
+
+        .remove-item:hover {
+            opacity: 0.8;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 2px solid var(--border-gray);
+            background: var(--light-gray);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary-black);
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .checkout-btn:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .carousel-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .brand-story {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: 60vh;
+            }
+
+            .carousel-content h2 {
+                font-size: 2rem;
+            }
+
+            .carousel-content p {
+                font-size: 1rem;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header id="header">
+        <nav>
+            <a href="#home" class="logo">RUHÉA</a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#quiz">Scent Quiz</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="nav-icon">🔍</button>
+                <button class="nav-icon">❤️</button>
+                <button class="nav-icon" onclick="toggleCart()">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="login-btn">Login</button>
+                <button class="signup-btn">Sign Up</button>
+                <button class="menu-toggle">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO CAROUSEL -->
+    <section class="hero-carousel" id="home">
+        <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=1920&q=80');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h2>Natural Essence</h2>
+                    <p>Discover our botanical fragrance collection</p>
+                    <a href="#shop" class="cta-button">Shop Collection</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=1920&q=80');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h2>Oriental Spices</h2>
+                    <p>Timeless scents crafted with exotic ingredients</p>
+                    <a href="#shop" class="cta-button">Explore Fragrances</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=1920&q=80');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h2>Luxury Night</h2>
+                    <p>Captivating evening fragrances</p>
+                    <a href="#shop" class="cta-button">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1920&q=80');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h2>Fresh Citrus</h2>
+                    <p>Refreshing scents for every day</p>
+                    <a href="#shop" class="cta-button">Discover More</a>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=1920&q=80');">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <h2>Floral Romance</h2>
+                    <p>Elegant rose and floral compositions</p>
+                    <a href="#shop" class="cta-button">View Collection</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
+        <div class="carousel-nav" id="carouselDots"></div>
+    </section>
+
+    <!-- SHOP BY CATEGORY -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Shop by Category</h2>
+        </div>
+        <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <!-- TODAY'S DEALS -->
+    <section class="section" id="shop">
+        <div class="section-top">
+            <h2 class="section-title" style="margin: 0">Today's Deals</h2>
+            <a href="#" class="view-all">View All Deals →</a>
+        </div>
+        <div class="product-scroll" id="dealsScroll"></div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Best Sellers</h2>
+            <p class="section-subtitle">Our most loved fragrances, chosen by you. Discover the scents that have captured hearts across Pakistan.</p>
+        </div>
+        <div class="product-grid" id="bestSellersGrid"></div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="#" class="cta-button" style="display: inline-block; background: var(--primary-black); color: white;">Shop All Best Sellers</a>
+        </div>
+    </section>
+
+    <!-- FEATURED COLLECTIONS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Featured Collections</h2>
+        </div>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80" alt="Royal Oud">
+                <div class="collection-content">
+                    <h3>The Royal Oud Collection</h3>
+                    <p>Experience the majesty of pure Oud, sourced from the finest agarwood.</p>
+                    <a href="#" class="cta-button">Explore Collection</a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=800&q=80" alt="Floral Symphony">
+                <div class="collection-content">
+                    <h3>Floral Symphony</h3>
+                    <p>A delicate blend of nature's finest blooms.</p>
+                    <a href="#" class="cta-button">Explore Collection</a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80" alt="Musk & Amber">
+                <div class="collection-content">
+                    <h3>Musk & Amber</h3>
+                    <p>Warm, sensual, and enduring.</p>
+                    <a href="#" class="cta-button">Explore Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENT QUIZ -->
+    <section class="quiz-section" id="quiz">
+        <h2>Not sure which scent is for you?</h2>
+        <p>Take our interactive Scent Finder Quiz to discover your perfect fragrance match based on your personality and preferences.</p>
+        <button class="quiz-btn">Find My Scent</button>
+    </section>
+
+    <!-- CURATED FOR YOUR MOMENTS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Curated for Your Moments</h2>
+        </div>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80" alt="Jummah">
+                <div class="collection-content">
+                    <h3>Jummah Essentials</h3>
+                    <p>Pure, alcohol-free attars perfect for Friday prayers.</p>
+                    <a href="#" class="cta-button">Shop Collection</a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80" alt="Wedding">
+                <div class="collection-content">
+                    <h3>Wedding Season</h3>
+                    <p>Long-lasting, luxurious scents for your special moments.</p>
+                    <a href="#" class="cta-button">Shop Collection</a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&q=80" alt="Eid">
+                <div class="collection-content">
+                    <h3>Ramadan & Eid</h3>
+                    <p>Spiritual scents to elevate your festive celebrations.</p>
+                    <a href="#" class="cta-button">Shop Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section class="brand-story" id="about">
+        <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80" alt="Master Perfumer">
+        <div class="brand-content">
+            <h2>The Art of Scent</h2>
+            <p>At RUHEA, we believe that fragrance is more than just a scent—it's a journey through memory and emotion. Rooted in the rich heritage of Pakistani perfumery and infused with modern elegance, our creations are designed to tell your unique story.</p>
+            <p>Every bottle is a masterpiece, meticulously crafted using the finest ingredients from around the world. From the deep, resinous notes of Oud to the delicate whispers of Jasmine, we bring you the essence of luxury.</p>
+            <a href="#" class="read-more-link">Read Our Story →</a>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="instagram-section">
+        <h2 class="section-title">@RuheaFragrances</h2>
+        <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 1rem;">Follow us on Instagram for daily inspiration</p>
+        <div class="instagram-grid">
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+            <div class="instagram-item"><img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300&h=300&fit=crop&q=80" alt="Instagram"></div>
+        </div>
+        <button class="follow-btn">Follow Us</button>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <h2>Join Our Community</h2>
+        <p class="newsletter-subtitle">Subscribe to our newsletter to receive updates on new arrivals, special offers, and exclusive events.</p>
+        <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="subscribe-btn">Subscribe</button>
+        </form>
+        <p class="newsletter-disclaimer">By subscribing, you agree to our Privacy Policy and Terms of Service.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <img src="https://via.placeholder.com/150x50/c9a961/ffffff?text=RUHEA" alt="RUHEA">
+                <p class="footer-description">Exquisite fragrances and traditional attars tailored for the modern connoisseur. Experience the essence of luxury.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link">f</a>
+                    <a href="https://www.instagram.com/ruhea_21" class="social-link">📷</a>
+                    <a href="https://twitter.com" class="social-link">𝕏</a>
+                    <a href="https://tiktok.com" class="social-link">🎵</a>
+                </div>
+                <div class="footer-contact">
+                    <a href="#">New City Phase 2, Commercial Avenue M40, Motorway Wah Cantt</a>
+                    <a href="tel:+923101038060">+92 310 1038060</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Shop All</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Journal</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 RUHEA Scents & Fragrances. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <p style="font-size: 3rem; margin-bottom: 1rem;">🛒</p>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rs. 0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // PRODUCT DATA
+        const categories = [
+            { name: "Men's Fragrances", image: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&h=300&fit=crop&q=80" },
+            { name: "Floral Fragrances", image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400&h=300&fit=crop&q=80" },
+            { name: "Unisex Scents", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=300&fit=crop&q=80" },
+            { name: "Traditional Attars", image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=300&fit=crop&q=80" },
+            { name: "Gift Sets", image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=300&fit=crop&q=80" },
+            { name: "New Arrivals", image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&h=300&fit=crop&q=80" }
+        ];
+
+        const dealsProducts = [
+            { id: 1, name: "Black", brand: "RUHEA", price: 4700, originalPrice: 5000, discount: 6, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=400&fit=crop&q=80", timer: "12:45:30" },
+            { id: 2, name: "Black Avis", brand: "RUHEA", price: 4700, originalPrice: 5000, discount: 6, image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=300&h=400&fit=crop&q=80", timer: "12:45:30" },
+            { id: 3, name: "Earth21", brand: "RUHEA", price: 4700, originalPrice: 5000, discount: 6, image: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=300&h=400&fit=crop&q=80", timer: "12:45:30" },
+            { id: 4, name: "Flores Borneo", brand: "RUHEA", price: 7000, originalPrice: 8000, discount: 13, image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=300&h=400&fit=crop&q=80", timer: "12:45:30" },
+            { id: 5, name: "Golden Puff", brand: "RUHEA", price: 4700, originalPrice: 5000, discount: 6, image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=300&h=400&fit=crop&q=80", timer: "12:45:30" },
+            { id: 6, name: "Hunza", brand: "RUHEA", price: 4700, originalPrice: 5000, discount: 6, image: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=300&h=400&fit=crop&q=80", timer: "12:45:30" }
+        ];
+
+        const bestSellers = [
+            { id: 7, name: "Leonidas", brand: "RUHEA", price: 4700, rating: 5, reviews: 1, image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300&h=400&fit=crop&q=80" },
+            { id: 8, name: "Golden Puff", brand: "RUHEA", price: 4700, rating: 5, reviews: 12, image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=300&h=400&fit=crop&q=80" },
+            { id: 9, name: "Leather Fusion", brand: "RUHEA", price: 4700, rating: 5, reviews: 12, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=400&fit=crop&q=80" },
+            { id: 10, name: "Oud Al Noon", brand: "RUHEA", price: 4700, rating: 5, reviews: 12, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=400&fit=crop&q=80" }
+        ];
+
+        let cart = [];
+
+        // RENDER CATEGORIES
+        function renderCategories() {
+            const grid = document.getElementById('categoryGrid');
+            grid.innerHTML = categories.map(cat => `
+                <div class="category-card">
+                    <img src="${cat.image}" alt="${cat.name}">
+                    <div class="category-overlay">
+                        <h3 class="category-name">${cat.name}</h3>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // RENDER DEALS
+        function renderDeals() {
+            const scroll = document.getElementById('dealsScroll');
+            scroll.innerHTML = dealsProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <span class="product-badge">${product.discount}% OFF</span>
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-timer">Ends in ${product.timer}</div>
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price-wrapper">
+                            <span class="product-price">Rs. ${product.price.toLocaleString()}</span>
+                            <span class="product-original-price">Rs. ${product.originalPrice.toLocaleString()}</span>
+                        </div>
+                        <button class="view-product-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // RENDER BEST SELLERS
+        function renderBestSellers() {
+            const grid = document.getElementById('bestSellersGrid');
+            grid.innerHTML = bestSellers.map(product => `
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-rating">
+                            <span class="stars">${'★'.repeat(product.rating)}</span>
+                            <span class="review-count">(${product.reviews})</span>
+                        </div>
+                        <div class="product-price">Rs. ${product.price.toLocaleString()}</div>
+                        <button class="view-product-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // CAROUSEL
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function initCarousel() {
+            const dotsContainer = document.getElementById('carouselDots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function moveCarousel(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-advance
+        setInterval(() => moveCarousel(1), 5000);
+
+        // CART FUNCTIONS
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function addToCart(productId) {
+            const allProducts = [...dealsProducts, ...bestSellers];
+            const product = allProducts.find(p => p.id === productId);
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCart();
+            toggleCart();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function updateCart() {
+            const badge = document.getElementById('cartBadge');
+            const items = document.getElementById('cartItems');
+            const total = document.getElementById('cartTotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            badge.textContent = totalItems;
+            total.textContent = `Rs. ${totalPrice.toLocaleString()}`;
+            
+            if (cart.length === 0) {
+                items.innerHTML = `
+                    <div class="cart-empty">
+                        <p style="font-size: 3rem; margin-bottom: 1rem;">🛒</p>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+            } else {
+                items.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">Rs. ${item.price.toLocaleString()}</div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                            <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert(`Thank you for your purchase!\nTotal: Rs. ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            e.target.reset();
+            return false;
+        }
+
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // INIT
+        renderCategories();
+        renderDeals();
+        renderBestSellers();
+        initCarousel();
+    </script>
+</body>
+</html>
