@@ -36,11 +36,11 @@ The target audience for RUHEA consists of luxury fragrance enthusiasts—individ
 
 | Home Page | Product Collection |
 |---|---|
-| <img src="Screenshots/Screenshot_16-3-2026_14311_ruheafragrances.vercel.app.jpeg" width="400"> | <img src="./screenshots/product-grid.png" width="400"> |
+| <img src="Screenshots/Screenshot_16-3-2026_14311_ruheafragrances.vercel.app.jpeg" width="400"> | <img src="Screenshots/Screenshot_16-3-2026_14630_ruheafragrances.vercel.app.jpeg" width="400"> |
 
 | Mobile Responsive | Shopping Cart |
 |---|---|
-| <img src="Screenshots/ruheafragrances_mobile_view.png" width="200"> | <img src="./screenshots/cart-drawer.png" width="400"> |
+| <img src="Screenshots/ruheafragrances_mobile_view.png" width="200"> | <img src="Screenshots/Screenshot_16-3-2026_14913_ruheafragrances.vercel.app.jpeg" width="400"> |
 
 
 <details>
