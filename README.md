@@ -32,6 +32,17 @@ The target audience for RUHEA consists of luxury fragrance enthusiasts—individ
 - **Animations**: Framer Motion
 - **3D Rendering**: Three.js + React Three Fiber
 
+## 📸 Visual Showcase
+
+| Home Page | Product Collection |
+|---|---|
+| <img src="Screenshots/Screenshot_16-3-2026_14311_ruheafragrances.vercel.app.jpeg" width="400"> | <img src="./screenshots/product-grid.png" width="400"> |
+
+| Mobile Responsive | Shopping Cart |
+|---|---|
+| <img src="Screenshots/ruheafragrances_mobile_view.png" width="200"> | <img src="./screenshots/cart-drawer.png" width="400"> |
+
+
 <details>
 <summary>🛠 Technical Deep Dive (The Engine Room)</summary>
 
